@@ -1,45 +1,14 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IGEL-Service</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Grundlegende Stile */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: url('your-background-image.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.8); /* Weißer, leicht durchscheinender Hintergrund */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        p {
-            text-align: center;
-            font-size: 1.2em;
-        }
-
+        /* Inline CSS für die neuen Buttons */
         .button-container {
-            margin: 20px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+            margin: 20px;
         }
 
         .button-item {
@@ -54,7 +23,7 @@
             color: #000; /* Farbe des Punktes */
         }
 
-        .custom-button, .back-button {
+        .custom-button {
             display: inline-block;
             padding: 10px 20px;
             font-size: 16px;
@@ -66,207 +35,109 @@
             border-radius: 5px;
         }
 
-        .custom-button:hover, .back-button:hover {
+        .custom-button:hover {
             background-color: #0056b3; /* Hintergrundfarbe beim Hover */
-        }
-
-        .category-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .service-form {
-            display: none;
-            max-width: 400px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-        }
-
-        .service-form label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-
-        .service-form input,
-        .service-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .service-form textarea {
-            resize: vertical;
-        }
-
-        /* Media Queries für mobile Optimierung */
-        @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-                background: rgba(255, 255, 255, 0.9);
-            }
-
-            .custom-button, .back-button {
-                padding: 8px 16px;
-                font-size: 14px;
-            }
-
-            .category-title {
-                font-size: 20px;
-            }
-
-            .service-form {
-                padding: 10px;
-                max-width: 100%;
-            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div id="overview">
-            <h1>IGEL-Service</h1>
-            <p>Herzlich Willkommen, bitte wählen Sie die gewünschte Kategorie aus!</p>
+        <h1>IGEL-Service</h1>
+        <p>Herzlich Willkommen, bitte wählen Sie die gewünschte Kategorie aus!</p>
 
-            <div class="button-container">
-                <div class="button-item">
-                    <span class="bullet-point">•</span>
-                    <a href="#" class="custom-button" onclick="showForm('ersatzteil')">Ersatzteilbestellung</a>
-                </div>
-                <div class="button-item">
-                    <span class="bullet-point">•</span>
-                    <a href="#" class="custom-button" onclick="showForm('reparatur')">Reparaturanfrage</a>
-                </div>
-                <div class="button-item">
-                    <span class="bullet-point">•</span>
-                    <a href="#" class="custom-button" onclick="showForm('dokumentation')">Dokumentation</a>
-                </div>
-                <div class="button-item">
-                    <span class="bullet-point">•</span>
-                    <a href="#" class="custom-button" onclick="showForm('reklamation')">Reklamation</a>
-                </div>
+        <div class="button-container">
+            <div class="button-item">
+                <span class="bullet-point">•</span>
+                <a href="#" class="custom-button" onclick="showForm('ersatzteil')">Ersatzteilbestellung</a>
+            </div>
+            <div class="button-item">
+                <span class="bullet-point">•</span>
+                <a href="#" class="custom-button" onclick="showForm('reparatur')">Reparaturanfrage</a>
+            </div>
+            <div class="button-item">
+                <span class="bullet-point">•</span>
+                <a href="#" class="custom-button" onclick="showForm('dokumentation')">Dokumentation</a>
+            </div>
+            <div class="button-item">
+                <span class="bullet-point">•</span>
+                <a href="#" class="custom-button" onclick="showForm('reklamation')">Reklamation</a>
             </div>
         </div>
 
-        <div id="form-container">
-            <div class="category-title" id="form-title"></div>
+        <form id="ersatzteil" class="service-form" style="display:none;" onsubmit="sendMail(event, 'Ersatzteilbestellung')">
+            <h2>Ersatzteilbestellung</h2>
+            <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
+            <label for="ansprechpartner">Ansprechpartner:</label>
+            <input type="text" id="ansprechpartner" name="ansprechpartner" required>
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="telefonnummer">Telefonnummer:</label>
+            <input type="tel" id="telefonnummer" name="telefonnummer" required>
+            <label for="produktnummer">Produktnummer:</label>
+            <input type="text" id="produktnummer" name="produktnummer" required>
+            <label for="ersatzteilnummer">Ersatzteilnummer:</label>
+            <input type="text" id="ersatzteilnummer" name="ersatzteilnummer" required>
+            <label for="foto">Foto des Typenschildes:</label>
+            <input type="file" id="foto" name="foto" accept="image/*" capture="camera" required>
+            <button type="submit">Absenden</button>
+            <a href="#" class="custom-button" onclick="showOverview()">Zurück zur Übersicht</a>
+        </form>
 
-            <form id="ersatzteil" class="service-form" onsubmit="sendMail(event, 'Ersatzteilbestellung')">
-                <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
-                <label for="ansprechpartner">Ansprechpartner:</label>
-                <input type="text" id="ansprechpartner" name="ansprechpartner" required>
-                <label for="email">E-Mail:</label>
-                <input type="email" id="email" name="email" required>
-                <label for="telefonnummer">Telefonnummer:</label>
-                <input type="tel" id="telefonnummer" name="telefonnummer" required>
-                <label for="produktnummer">Produktnummer:</label>
-                <input type="text" id="produktnummer" name="produktnummer" required>
-                <label for="ersatzteilnummer">Ersatzteilnummer:</label>
-                <input type="text" id="ersatzteilnummer" name="ersatzteilnummer" required>
-                <label for="foto">Foto des Typenschildes:</label>
-                <input type="file" id="foto" name="foto" accept="image/*" capture="camera" required>
-                <button type="submit">Absenden</button>
-                <a href="#" class="back-button" onclick="showOverview()">Zurück zur Übersicht</a>
-            </form>
+        <form id="reklamation" class="service-form" style="display:none;" onsubmit="sendMail(event, 'Reklamation')">
+            <h2>Reklamation</h2>
+            <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
+            <label for="ansprechpartner">Ansprechpartner:</label>
+            <input type="text" id="ansprechpartner" name="ansprechpartner" required>
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="telefonnummer">Telefonnummer:</label>
+            <input type="tel" id="telefonnummer" name="telefonnummer" required>
+            <label for="produktnummer">Produktnummer:</label>
+            <input type="text" id="produktnummer" name="produktnummer" required>
+            <label for="foto">Foto des Typenschildes:</label>
+            <input type="file" id="foto" name="foto" accept="image/*" capture="camera" required>
+            <label for="beschreibung">Beschreibung des Problems:</label>
+            <textarea id="beschreibung" name="beschreibung" required></textarea>
+            <button type="submit">Absenden</button>
+            <a href="#" class="custom-button" onclick="showOverview()">Zurück zur Übersicht</a>
+        </form>
 
-            <form id="reklamation" class="service-form" onsubmit="sendMail(event, 'Reklamation')">
-                <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
-                <label for="ansprechpartner">Ansprechpartner:</label>
-                <input type="text" id="ansprechpartner" name="ansprechpartner" required>
-                <label for="email">E-Mail:</label>
-                <input type="email" id="email" name="email" required>
-                <label for="telefonnummer">Telefonnummer:</label>
-                <input type="tel" id="telefonnummer" name="telefonnummer" required>
-                <label for="produktnummer">Produktnummer:</label>
-                <input type="text" id="produktnummer" name="produktnummer" required>
-                <label for="foto">Foto des Typenschildes:</label>
-                <input type="file" id="foto" name="foto" accept="image/*" capture="camera" required>
-                <label for="beschreibung">Beschreibung des Problems:</label>
-                <textarea id="beschreibung" name="beschreibung" required></textarea>
-                <button type="submit">Absenden</button>
-                <a href="#" class="back-button" onclick="showOverview()">Zurück zur Übersicht</a>
-            </form>
+        <form id="reparatur" class="service-form" style="display:none;" onsubmit="sendMail(event, 'Reparaturanfrage')">
+            <h2>Reparaturanfrage</h2>
+            <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
+            <label for="ansprechpartner">Ansprechpartner:</label>
+            <input type="text" id="ansprechpartner" name="ansprechpartner" required>
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="telefonnummer">Telefonnummer:</label>
+            <input type="tel" id="telefonnummer" name="telefonnummer" required>
+            <label for="produktnummer">Produktnummer:</label>
+            <input type="text" id="produktnummer" name="produktnummer" required>
+            <label for="foto">Foto des Typenschildes:</label>
+            <input type="file" id="foto" name="foto" accept="image/*" capture="camera" required>
+            <label for="beschreibung">Beschreibung des Problems:</label>
+            <textarea id="beschreibung" name="beschreibung" required></textarea>
+            <button type="submit">Absenden</button>
+            <a href="#" class="custom-button" onclick="showOverview()">Zurück zur Übersicht</a>
+        </form>
 
-            <form id="reparatur" class="service-form" onsubmit="sendMail(event, 'Reparaturanfrage')">
-                <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
-                <label for="ansprechpartner">Ansprechpartner:</label>
-                <input type="text" id="ansprechpartner" name="ansprechpartner" required>
-                <label for="email">E-Mail:</label>
-                <input type="email" id="email" name="email" required>
-                <label for="telefonnummer">Telefonnummer:</label>
-                <input type="tel" id="telefonnummer" name="telefonnummer" required>
-                <label for="produktnummer">Produktnummer:</label>
-                <input type="text" id="produktnummer" name="produktnummer" required>
-                <label for="foto">Foto des Typenschildes:</label>
-                <input type="file" id="foto" name="foto" accept="image/*" capture="camera" required>
-                <label for="beschreibung">Beschreibung des Problems:</label>
-                <textarea id="beschreibung" name="beschreibung" required></textarea>
-                <button type="submit">Absenden</button>
-                <a href="#" class="back-button" onclick="showOverview()">Zurück zur Übersicht</a>
-            </form>
-
-            <form id="dokumentation" class="service-form" onsubmit="sendMail(event, 'Dokumentation')">
-                <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
-                <label for="ansprechpartner">Ansprechpartner:</label>
-                <input type="text" id="ansprechpartner" name="ansprechpartner" required>
-                <label for="email">E-Mail:</label>
-                <input type="email" id="email" name="email" required>
-                <label for="telefonnummer">Telefonnummer:</label>
-                <input type="tel" id="telefonnummer" name="telefonnummer" required>
-                <label for="foto">Foto des Typenschildes:</label>
-                <input type="file" id="foto" name="foto" accept="image/*" capture="camera" required>
-                <label for="beschreibung">Beschreibung:</label>
-                <textarea id="beschreibung" name="beschreibung" required></textarea>
-                <button type="submit">Absenden</button>
-                <a href="#" class="back-button" onclick="showOverview()">Zurück zur Übersicht</a>
-            </form>
-        </div>
+        <form id="dokumentation" class="service-form" style="display:none;" onsubmit="sendMail(event, 'Dokumentation')">
+            <h2>Dokumentation</h2>
+            <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
+            <label for="ansprechpartner">Ansprechpartner:</label>
+            <input type="text" id="ansprechpartner" name="ansprechpartner" required>
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="telefonnummer">Telefonnummer:</label>
+            <input type="tel" id="telefonnummer" name="telefonnummer" required>
+            <label for="foto">Foto des Typenschildes:</label>
+            <input type="file" id="foto" name="foto" accept="image/*" capture="camera" required>
+            <label for="beschreibung">Beschreibung:</label>
+            <textarea id="beschreibung" name="beschreibung" required></textarea>
+            <button type="submit">Absenden</button>
+            <a href="#" class="custom-button" onclick="showOverview()">Zurück zur Übersicht</a>
+        </form>
     </div>
-    <script>
-        function showForm(formId) {
-            document.getElementById('overview').style.display = 'none';
-            document.getElementById('form-container').style.display = 'block';
-            document.getElementById('form-title').innerText = document.querySelector(`[onclick="showForm('${formId}')"]`).innerText;
-            const forms = document.querySelectorAll('.service-form');
-            forms.forEach(form => {
-                form.style.display = form.id === formId ? 'block' : 'none';
-            });
-        }
-
-        function showOverview() {
-            document.getElementById('overview').style.display = 'block';
-            document.getElementById('form-container').style.display = 'none';
-        }
-
-        function sendMail(event, formType) {
-            event.preventDefault();
-            const form = event.target;
-            const formData = new FormData(form);
-            formData.append('formType', formType);
-
-            fetch('https://your-domain.com/path/to/send_mail.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert(data);
-                form.reset();
-                showOverview();
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Fehler beim Senden des Formulars.');
-            });
-        }
-    </script>
+    <script src="scripts.js"></script>
 </body>
 </html>
