@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGEL-Service</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>IGEL-Service</h1>
+        <p>Willkommen im Servicebereich. Bitte wählen Sie den gewünschten Service aus und füllen Sie das Formular aus.</p>
+
+        <div class="service-buttons">
+            <button onclick="showForm('reklamation')">Reklamation</button>
+            <button onclick="showForm('ersatzteil')">Ersatzteilbestellung</button>
+            <button onclick="showForm('reparatur')">Reparaturanfrage</button>
+            <button onclick="showForm('dokumentation')">Dokumentation</button>
+        </div>
+
+        <form id="reklamation" class="service-form" style="display:none;" onsubmit="sendMail(event, 'Reklamation')">
+            <h2>Reklamation</h2>
+            <label for="ansprechpartner">Ansprechpartner:</label>
+            <input type="text" id="ansprechpartner" name="ansprechpartner" required>
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="telefonnummer">Telefonnummer:</label>
+            <input type="tel" id="telefonnummer" name="telefonnummer" required>
+            <label for="produktnummer">Produktnummer:</label>
+            <input type="text" id="produktnummer" name="produktnummer" required>
+            <label for="beschreibung">Beschreibung des Problems:</label>
+            <textarea id="beschreibung" name="beschreibung" required></textarea>
+            <button type="submit">Absenden</button>
+        </form>
+
+        <form id="ersatzteil" class="service-form" style="display:none;" onsubmit="sendMail(event, 'Ersatzteilbestellung')">
+            <h2>Ersatzteilbestellung</h2>
+            <label for="ansprechpartner">Ansprechpartner:</label>
+            <input type="text" id="ansprechpartner" name="ansprechpartner" required>
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="telefonnummer">Telefonnummer:</label>
+            <input type="tel" id="telefonnummer" name="telefonnummer" required>
+            <label for="produktnummer">Produktnummer:</label>
+            <input type="text" id="produktnummer" name="produktnummer" required>
+            <label for="ersatzteilnummer">Ersatzteilnummer:</label>
+            <input type="text" id="ersatzteilnummer" name="ersatzteilnummer" required>
+            <button type="submit">Absenden</button>
+        </form>
+
+        <form id="reparatur" class="service-form" style="display:none;" onsubmit="sendMail(event, 'Reparaturanfrage')">
+            <h2>Reparaturanfrage</h2>
+            <label for="ansprechpartner">Ansprechpartner:</label>
+            <input type="text" id="ansprechpartner" name="ansprechpartner" required>
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="telefonnummer">Telefonnummer:</label>
+            <input type="tel" id="telefonnummer" name="telefonnummer" required>
+            <label for="produktnummer">Produktnummer:</label>
+            <input type="text" id="produktnummer" name="produktnummer" required>
+            <label for="beschreibung">Beschreibung des Problems:</label>
+            <textarea id="beschreibung" name="beschreibung" required></textarea>
+            <button type="submit">Absenden</button>
+        </form>
+
+        <form id="dokumentation" class="service-form" style="display:none;" onsubmit="sendMail(event, 'Dokumentation')">
+            <h2>Dokumentation</h2>
+            <label for="ansprechpartner">Ansprechpartner:</label>
+            <input type="text" id="ansprechpartner" name="ansprechpartner" required>
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="telefonnummer">Telefonnummer:</label>
+            <input type="tel" id="telefonnummer" name="telefonnummer" required>
+            <label for="beschreibung">Beschreibung:</label>
+            <textarea id="beschreibung" name="beschreibung" required></textarea>
+            <button type="submit">Absenden</button>
+        </form>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
