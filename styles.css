@@ -52,8 +52,8 @@ h1 {
     color: #ffffff;
     background-color: #F2592B;
     border-radius: 5px;
-    width: calc(100% - 30px);
-    text-align: left;
+    width: calc(100% - 30px); /* Adjust width to fit within container */
+    text-align: left; /* Align text to the left */
 }
 
 .custom-button:hover {
@@ -117,7 +117,7 @@ h1 {
     border-radius: 5px;
     width: 100%;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .back-button:hover {
