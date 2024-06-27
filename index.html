@@ -125,7 +125,6 @@
             <button type="submit">Absenden</button>
         </form>
     </div>
-    <script src="scripts.js"></script>
     <script>
         function showForm(formId) {
             const forms = document.querySelectorAll('.service-form');
@@ -140,17 +139,19 @@
             const formData = new FormData(form);
             formData.append('formType', formType);
 
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'YOUR_SERVER_ENDPOINT_HERE', true);
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    alert('Formular erfolgreich gesendet!');
-                    form.reset();
-                } else {
-                    alert('Fehler beim Senden des Formulars.');
-                }
-            };
-            xhr.send(formData);
+            fetch('https://your-domain.com/path/to/send_mail.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                form.reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Fehler beim Senden des Formulars.');
+            });
         }
     </script>
 </body>
