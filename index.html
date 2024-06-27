@@ -39,11 +39,19 @@
             margin: 20px 0;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
         }
 
         .button-item {
+            display: flex;
+            align-items: center;
             margin-bottom: 10px;
+        }
+
+        .bullet-point {
+            margin-right: 10px;
+            font-size: 20px;
+            color: #000; /* Farbe des Punktes */
         }
 
         .custom-button, .back-button {
@@ -56,7 +64,6 @@
             color: #ffffff; /* Textfarbe */
             background-color: #F2592B; /* Hintergrundfarbe */
             border-radius: 5px;
-            margin: 5px;
         }
 
         .custom-button:hover, .back-button:hover {
@@ -72,7 +79,7 @@
 
         .service-form {
             display: none;
-            max-width: 600px;
+            max-width: 400px;
             margin: 20px auto;
             padding: 20px;
             background: #fff;
@@ -104,6 +111,7 @@
         @media (max-width: 600px) {
             .container {
                 padding: 10px;
+                background: rgba(255, 255, 255, 0.9);
             }
 
             .custom-button, .back-button {
@@ -117,6 +125,7 @@
 
             .service-form {
                 padding: 10px;
+                max-width: 100%;
             }
         }
     </style>
@@ -129,15 +138,19 @@
 
             <div class="button-container">
                 <div class="button-item">
+                    <span class="bullet-point">•</span>
                     <a href="#" class="custom-button" onclick="showForm('ersatzteil')">Ersatzteilbestellung</a>
                 </div>
                 <div class="button-item">
+                    <span class="bullet-point">•</span>
                     <a href="#" class="custom-button" onclick="showForm('reparatur')">Reparaturanfrage</a>
                 </div>
                 <div class="button-item">
+                    <span class="bullet-point">•</span>
                     <a href="#" class="custom-button" onclick="showForm('dokumentation')">Dokumentation</a>
                 </div>
                 <div class="button-item">
+                    <span class="bullet-point">•</span>
                     <a href="#" class="custom-button" onclick="showForm('reklamation')">Reklamation</a>
                 </div>
             </div>
