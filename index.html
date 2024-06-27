@@ -69,7 +69,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="overview">
         <h1>IGEL-Service</h1>
         <p>Herzlich Willkommen, bitte wählen Sie die gewünschte Kategorie aus!</p>
 
@@ -91,7 +91,9 @@
                 <a href="#" class="custom-button" onclick="showForm('reklamation')">Reklamation</a>
             </div>
         </div>
+    </div>
 
+    <div id="form-container" style="display:none;">
         <form id="ersatzteil" class="service-form" onsubmit="sendMail(event, 'Ersatzteilbestellung')">
             <h2>Ersatzteilbestellung</h2>
             <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
@@ -166,8 +168,11 @@
             <a href="#" class="custom-button" onclick="showOverview()">Zurück zur Übersicht</a>
         </form>
     </div>
+
     <script>
         function showForm(formId) {
+            document.getElementById('overview').style.display = 'none';
+            document.getElementById('form-container').style.display = 'block';
             const forms = document.querySelectorAll('.service-form');
             forms.forEach(form => {
                 form.style.display = form.id === formId ? 'block' : 'none';
@@ -175,10 +180,8 @@
         }
 
         function showOverview() {
-            const forms = document.querySelectorAll('.service-form');
-            forms.forEach(form => {
-                form.style.display = 'none';
-            });
+            document.getElementById('overview').style.display = 'block';
+            document.getElementById('form-container').style.display = 'none';
         }
 
         function sendMail(event, formType) {
