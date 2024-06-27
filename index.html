@@ -126,5 +126,32 @@
         </form>
     </div>
     <script src="scripts.js"></script>
+    <script>
+        function showForm(formId) {
+            const forms = document.querySelectorAll('.service-form');
+            forms.forEach(form => {
+                form.style.display = form.id === formId ? 'block' : 'none';
+            });
+        }
+
+        function sendMail(event, formType) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            formData.append('formType', formType);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'YOUR_SERVER_ENDPOINT_HERE', true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    alert('Formular erfolgreich gesendet!');
+                    form.reset();
+                } else {
+                    alert('Fehler beim Senden des Formulars.');
+                }
+            };
+            xhr.send(formData);
+        }
+    </script>
 </body>
 </html>
