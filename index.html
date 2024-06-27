@@ -6,9 +6,8 @@
     <title>IGEL-Service</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Inline CSS für die neuen Buttons */
         .button-container {
-            margin: 20px;
+            margin: 20px 0;
         }
 
         .button-item {
@@ -20,7 +19,7 @@
         .bullet-point {
             margin-right: 10px;
             font-size: 20px;
-            color: #000; /* Farbe des Punktes */
+            color: #000;
         }
 
         .custom-button {
@@ -30,13 +29,42 @@
             font-weight: bold;
             text-align: center;
             text-decoration: none;
-            color: #ffffff; /* Textfarbe */
-            background-color: #F2592B; /* Hintergrundfarbe */
+            color: #ffffff;
+            background-color: #F2592B;
             border-radius: 5px;
         }
 
         .custom-button:hover {
-            background-color: #0056b3; /* Hintergrundfarbe beim Hover */
+            background-color: #0056b3;
+        }
+
+        .service-form {
+            display: none;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-form label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        .service-form input,
+        .service-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .service-form textarea {
+            resize: vertical;
         }
     </style>
 </head>
@@ -64,7 +92,7 @@
             </div>
         </div>
 
-        <form id="ersatzteil" class="service-form" style="display:none;" onsubmit="sendMail(event, 'Ersatzteilbestellung')">
+        <form id="ersatzteil" class="service-form" onsubmit="sendMail(event, 'Ersatzteilbestellung')">
             <h2>Ersatzteilbestellung</h2>
             <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
             <label for="ansprechpartner">Ansprechpartner:</label>
@@ -83,7 +111,7 @@
             <a href="#" class="custom-button" onclick="showOverview()">Zurück zur Übersicht</a>
         </form>
 
-        <form id="reklamation" class="service-form" style="display:none;" onsubmit="sendMail(event, 'Reklamation')">
+        <form id="reklamation" class="service-form" onsubmit="sendMail(event, 'Reklamation')">
             <h2>Reklamation</h2>
             <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
             <label for="ansprechpartner">Ansprechpartner:</label>
@@ -102,7 +130,7 @@
             <a href="#" class="custom-button" onclick="showOverview()">Zurück zur Übersicht</a>
         </form>
 
-        <form id="reparatur" class="service-form" style="display:none;" onsubmit="sendMail(event, 'Reparaturanfrage')">
+        <form id="reparatur" class="service-form" onsubmit="sendMail(event, 'Reparaturanfrage')">
             <h2>Reparaturanfrage</h2>
             <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
             <label for="ansprechpartner">Ansprechpartner:</label>
@@ -121,7 +149,7 @@
             <a href="#" class="custom-button" onclick="showOverview()">Zurück zur Übersicht</a>
         </form>
 
-        <form id="dokumentation" class="service-form" style="display:none;" onsubmit="sendMail(event, 'Dokumentation')">
+        <form id="dokumentation" class="service-form" onsubmit="sendMail(event, 'Dokumentation')">
             <h2>Dokumentation</h2>
             <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
             <label for="ansprechpartner">Ansprechpartner:</label>
@@ -138,6 +166,43 @@
             <a href="#" class="custom-button" onclick="showOverview()">Zurück zur Übersicht</a>
         </form>
     </div>
+    <script>
+        function showForm(formId) {
+            const forms = document.querySelectorAll('.service-form');
+            forms.forEach(form => {
+                form.style.display = form.id === formId ? 'block' : 'none';
+            });
+        }
+
+        function showOverview() {
+            const forms = document.querySelectorAll('.service-form');
+            forms.forEach(form => {
+                form.style.display = 'none';
+            });
+        }
+
+        function sendMail(event, formType) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            formData.append('formType', formType);
+
+            fetch('https://your-domain.com/path/to/send_mail.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                form.reset();
+                showOverview();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Fehler beim Senden des Formulars.');
+            });
+        }
+    </script>
     <script src="scripts.js"></script>
 </body>
 </html>
