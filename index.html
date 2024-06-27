@@ -5,17 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IGEL-Service</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Inline CSS für die neuen Buttons */
+        .button-container {
+            margin: 20px;
+        }
+
+        .button-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .bullet-point {
+            margin-right: 10px;
+            font-size: 20px;
+            color: #000; /* Farbe des Punktes */
+        }
+
+        .custom-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            color: #ffffff; /* Textfarbe */
+            background-color: #F2592B; /* Hintergrundfarbe */
+            border-radius: 5px;
+        }
+
+        .custom-button:hover {
+            background-color: #0056b3; /* Hintergrundfarbe beim Hover */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>IGEL-Service</h1>
-        <p>Willkommen im Servicebereich. Bitte wählen Sie den gewünschten Service aus und füllen Sie das Formular aus.</p>
+        <p>Willkommen im Servicebereich der IGEL-nobilis. Bitte wählen Sie den gewünschten Service aus und füllen Sie das Formular aus.</p>
 
-        <div class="service-buttons">
-            <button onclick="showForm('reklamation')">Reklamation</button>
-            <button onclick="showForm('ersatzteil')">Ersatzteilbestellung</button>
-            <button onclick="showForm('reparatur')">Reparaturanfrage</button>
-            <button onclick="showForm('dokumentation')">Dokumentation</button>
+        <div class="button-container">
+            <div class="button-item">
+                <span class="bullet-point">•</span>
+                <a href="#" class="custom-button" onclick="showForm('reklamation')">Reklamation</a>
+            </div>
+            <div class="button-item">
+                <span class="bullet-point">•</span>
+                <a href="#" class="custom-button" onclick="showForm('ersatzteil')">Ersatzteilbestellung</a>
+            </div>
+            <div class="button-item">
+                <span class="bullet-point">•</span>
+                <a href="#" class="custom-button" onclick="showForm('reparatur')">Reparaturanfrage</a>
+            </div>
+            <div class="button-item">
+                <span class="bullet-point">•</span>
+                <a href="#" class="custom-button" onclick="showForm('dokumentation')">Dokumentation</a>
+            </div>
         </div>
 
         <form id="reklamation" class="service-form" style="display:none;" onsubmit="sendMail(event, 'Reklamation')">
