@@ -88,7 +88,7 @@
             </div>
             <div class="button-item">
                 <span class="bullet-point">•</span>
-                <a href="#" class="custom-button" onclick="showForm('reklamation')">Reklamation</a>
+                <a href="reklamation.html" class="custom-button">Reklamation</a>
             </div>
         </div>
     </div>
@@ -105,29 +105,10 @@
             <input type="tel" id="telefonnummer" name="telefonnummer" required>
             <label for="produktnummer">Produktnummer:</label>
             <input type="text" id="produktnummer" name="produktnummer" required>
-            <label for="ersatzteilnummer">Ersatzteil:</label>
+            <label for="ersatzteil">Ersatzteil:</label>
             <input type="text" id="ersatzteil" name="ersatzteil" required>
             <label for="foto">Foto des Typenschildes:</label>
             <input type="file" id="foto" name="foto" accept="image/*" capture="camera" required>
-            <button type="submit">Absenden</button>
-            <a href="#" class="custom-button" onclick="showOverview()">Zurück zur Übersicht</a>
-        </form>
-
-        <form id="reklamation" class="service-form" onsubmit="sendMail(event, 'Reklamation')">
-            <h2>Reklamation</h2>
-            <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
-            <label for="ansprechpartner">Ansprechpartner:</label>
-            <input type="text" id="ansprechpartner" name="ansprechpartner" required>
-            <label for="email">E-Mail:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="telefonnummer">Telefonnummer:</label>
-            <input type="tel" id="telefonnummer" name="telefonnummer" required>
-            <label for="produktnummer">Produktnummer:</label>
-            <input type="text" id="produktnummer" name="produktnummer" required>
-            <label for="foto">Foto des Typenschildes:</label>
-            <input type="file" id="foto" name="foto" accept="image/*" capture="camera" required>
-            <label for="beschreibung">Beschreibung des Problems:</label>
-            <textarea id="beschreibung" name="beschreibung" required></textarea>
             <button type="submit">Absenden</button>
             <a href="#" class="custom-button" onclick="showOverview()">Zurück zur Übersicht</a>
         </form>
