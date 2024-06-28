@@ -76,15 +76,15 @@
         <div class="button-container">
             <div class="button-item">
                 <span class="bullet-point">•</span>
-                <a href="#" class="custom-button" onclick="showForm('ersatzteil')">Ersatzteilbestellung</a>
+                <a href="#" class="custom-button" onclick="loadForm('ersatzteil')">Ersatzteilbestellung</a>
             </div>
             <div class="button-item">
                 <span class="bullet-point">•</span>
-                <a href="#" class="custom-button" onclick="showForm('reparatur')">Reparaturanfrage</a>
+                <a href="#" class="custom-button" onclick="loadForm('reparatur')">Reparaturanfrage</a>
             </div>
             <div class="button-item">
                 <span class="bullet-point">•</span>
-                <a href="#" class="custom-button" onclick="showForm('dokumentation')">Dokumentation</a>
+                <a href="#" class="custom-button" onclick="loadForm('dokumentation')">Dokumentation</a>
             </div>
             <div class="button-item">
                 <span class="bullet-point">•</span>
@@ -151,6 +151,10 @@
     </div>
 
     <script>
+        function loadForm(formId) {
+            window.location.href = formId + ".html";
+        }
+
         function showForm(formId) {
             document.getElementById('overview').style.display = 'none';
             document.getElementById('form-container').style.display = 'block';
