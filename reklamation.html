@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reklamation</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #F2592B;
+            border-radius: 4px;
+            width: 80%;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        select {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reklamation</h1>
+        <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
+        
+        <form id="reklamation" class="service-form" onsubmit="sendMail(event, 'Reklamation')">
+            <label for="ansprechpartner">Ansprechpartner:</label>
+            <input type="text" id="ansprechpartner" name="ansprechpartner" required>
+            
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="telefonnummer">Telefonnummer:</label>
+            <input type="tel" id="telefonnummer" name="telefonnummer" required>
+            
+            <label for="artikelnummer">Artikelnummer:</label>
+            <input type="text" id="artikelnummer" name="artikelnummer" required>
+            
+            <label for="foto">Foto des Typenschildes:</label>
+            <input type="file" id="foto" name="foto" accept="image/*" capture="camera" required>
+            
+            <label for="grund">Bitte wählen Sie den Grund der Reklamation:</label>
+            <select id="grund" name="grund" required>
+                <option value="Transportschaden">Transportschaden</option>
+                <option value="Ware defekt">Ware defekt</option>
+                <option value="Teile oder Zubehör fehlt">Teile oder Zubehör fehlt</option>
+                <option value="falschen Artikel erhalten">falschen Artikel erhalten</option>
+                <option value="sonstiges">sonstiges</option>
+            </select>
+            
+            <label for="beschreibung">Beschreibung des Problems:</label>
+            <textarea id="beschreibung" name="beschreibung" required></textarea>
+            
+            <button type="submit">Absenden</button>
+            <a href="index.html" class="back-button">Zurück zur Übersicht</a>
+        </form>
+    </div>
+    <script>
+        function sendMail(event, serviceType) {
+            event.preventDefault();
+
+            const form = event.target;
+            const ansprechpartner = form.elements['ansprechpartner'].value;
+            const email = form.elements['email'].value;
+            const telefonnummer = form.elements['telefonnummer'].value;
+            const artikelnummer = form.elements['artikelnummer'].value;
+            const grund = form.elements['grund'].value;
+            const beschreibung = form.elements['beschreibung'].value;
+            const foto = form.elements['foto'].files[0];
+
+            const subject = `Neue ${serviceType}`;
+            let body = `Ansprechpartner: ${ansprechpartner}\nE-Mail: ${email}\nTelefonnummer: ${telefonnummer}\nArtikelnummer: ${artikelnummer}\nGrund der Reklamation: ${grund}\nBeschreibung: ${beschreibung}`;
+
+            const mailtoLink = `mailto:dirk.schramm@igel-nobilis.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            if (foto) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const base64Data = e.target.result.split(',')[1];
+                    body += `\n\nFoto des Typenschildes: ${base64Data}`;
+                    const updatedMailtoLink = `mailto:dirk.schramm@igel-nobilis.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    window.location.href = updatedMailtoLink;
+                };
+                reader.readAsDataURL(foto);
+            } else {
+                window.location.href = mailtoLink;
+            }
+        }
+    </script>
+</body>
+</html>
