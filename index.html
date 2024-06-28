@@ -3,26 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IGEL-Service</title>
+    <title>Reklamation</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        .button-container {
-            margin: 20px 0;
-        }
-
-        .button-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .bullet-point {
-            margin-right: 10px;
-            font-size: 40px;
-            color: #000;
-        }
-
-        .custom-button {
+        .back-button {
             display: inline-block;
             padding: 10px 20px;
             font-size: 16px;
@@ -32,165 +16,88 @@
             color: #ffffff;
             background-color: #F2592B;
             border-radius: 4px;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
         }
 
-        .custom-button:hover {
+        .back-button:hover {
             background-color: #0056b3;
         }
 
-        .service-form {
-            display: none;
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .service-form label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-
-        .service-form input,
-        .service-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .service-form textarea {
-            resize: vertical;
+        select {
+            width: 150%;
         }
     </style>
 </head>
 <body>
-    <div class="container" id="overview">
-        <h1>IGEL-Service</h1>
-        <p>Herzlich Willkommen, bitte wählen Sie die gewünschte Kategorie aus!</p>
-
-        <div class="button-container">
-            <div class="button-item">
-                <span class="bullet-point">•</span>
-                <a href="#" class="custom-button" onclick="loadForm('ersatzteil')">Ersatzteilbestellung</a>
-            </div>
-            <div class="button-item">
-                <span class="bullet-point">•</span>
-                <a href="#" class="custom-button" onclick="loadForm('reparatur')">Reparaturanfrage</a>
-            </div>
-            <div class="button-item">
-                <span class="bullet-point">•</span>
-                <a href="#" class="custom-button" onclick="loadForm('dokumentation')">Dokumentation</a>
-            </div>
-            <div class="button-item">
-                <span class="bullet-point">•</span>
-                <a href="reklamation.html" class="custom-button">Reklamation</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="form-container" style="display:none;">
-        <form id="ersatzteil" class="service-form" onsubmit="sendMail(event, 'Ersatzteilbestellung')">
-            <h2>Ersatzteilbestellung</h2>
-            <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
+    <div class="container">
+        <h1>Reklamation</h1>
+        <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
+        
+        <form id="reklamation" class="service-form" onsubmit="sendMail(event, 'Reklamation')">
             <label for="ansprechpartner">Ansprechpartner:</label>
             <input type="text" id="ansprechpartner" name="ansprechpartner" required>
+            
             <label for="email">E-Mail:</label>
             <input type="email" id="email" name="email" required>
+            
             <label for="telefonnummer">Telefonnummer:</label>
             <input type="tel" id="telefonnummer" name="telefonnummer" required>
-            <label for="produktnummer">Produktnummer:</label>
-            <input type="text" id="produktnummer" name="produktnummer" required>
-            <label for="ersatzteil">Ersatzteil:</label>
-            <input type="text" id="ersatzteil" name="ersatzteil" required>
+            
+            <label for="artikelnummer">Artikelnummer:</label>
+            <input type="text" id="artikelnummer" name="artikelnummer" required>
+            
             <label for="foto">Foto des Typenschildes:</label>
             <input type="file" id="foto" name="foto" accept="image/*" capture="camera" required>
-            <button type="submit">Absenden</button>
-            <a href="#" class="custom-button" onclick="showOverview()">Zurück zur Übersicht</a>
-        </form>
-
-        <form id="reparatur" class="service-form" onsubmit="sendMail(event, 'Reparaturanfrage')">
-            <h2>Reparaturanfrage</h2>
-            <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
-            <label for="ansprechpartner">Ansprechpartner:</label>
-            <input type="text" id="ansprechpartner" name="ansprechpartner" required>
-            <label for="email">E-Mail:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="telefonnummer">Telefonnummer:</label>
-            <input type="tel" id="telefonnummer" name="telefonnummer" required>
-            <label for="produktnummer">Produktnummer:</label>
-            <input type="text" id="produktnummer" name="produktnummer" required>
-            <label for="foto">Foto des Typenschildes:</label>
-            <input type="file" id="foto" name="foto" accept="image/*" capture="camera" required>
+            
+            <label for="grund">Bitte wählen Sie den Grund der Reklamation:</label>
+            <select id="grund" name="grund" required>
+                <option value="Transportschaden">Transportschaden</option>
+                <option value="Ware defekt">Ware defekt</option>
+                <option value="Teile oder Zubehör fehlt">Teile oder Zubehör fehlt</option>
+                <option value="falschen Artikel erhalten">falschen Artikel erhalten</option>
+                <option value="sonstiges">sonstiges</option>
+            </select>
+            
             <label for="beschreibung">Beschreibung des Problems:</label>
             <textarea id="beschreibung" name="beschreibung" required></textarea>
+            
             <button type="submit">Absenden</button>
-            <a href="#" class="custom-button" onclick="showOverview()">Zurück zur Übersicht</a>
-        </form>
-
-        <form id="dokumentation" class="service-form" onsubmit="sendMail(event, 'Dokumentation')">
-            <h2>Dokumentation</h2>
-            <p>Bitte machen Sie ein Foto des Typenschildes und füllen Sie das Formular aus.</p>
-            <label for="ansprechpartner">Ansprechpartner:</label>
-            <input type="text" id="ansprechpartner" name="ansprechpartner" required>
-            <label for="email">E-Mail:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="telefonnummer">Telefonnummer:</label>
-            <input type="tel" id="telefonnummer" name="telefonnummer" required>
-            <label for="foto">Foto des Typenschildes:</label>
-            <input type="file" id="foto" name="foto" accept="image/*" capture="camera" required>
-            <label for="beschreibung">Beschreibung:</label>
-            <textarea id="beschreibung" name="beschreibung" required></textarea>
-            <button type="submit">Absenden</button>
-            <a href="#" class="custom-button" onclick="showOverview()">Zurück zur Übersicht</a>
+            <a href="index.html" class="back-button">Zurück zur Übersicht</a>
         </form>
     </div>
-
     <script>
-        function loadForm(formId) {
-            window.location.href = formId + ".html";
-        }
-
-        function showForm(formId) {
-            document.getElementById('overview').style.display = 'none';
-            document.getElementById('form-container').style.display = 'block';
-            const forms = document.querySelectorAll('.service-form');
-            forms.forEach(form => {
-                form.style.display = form.id === formId ? 'block' : 'none';
-            });
-        }
-
-        function showOverview() {
-            document.getElementById('overview').style.display = 'block';
-            document.getElementById('form-container').style.display = 'none';
-        }
-
-        function sendMail(event, formType) {
+        function sendMail(event, serviceType) {
             event.preventDefault();
-            const form = event.target;
-            const formData = new FormData(form);
-            formData.append('formType', formType);
 
-            fetch('https://your-domain.com/path/to/send_mail.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert(data);
-                form.reset();
-                showOverview();
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Fehler beim Senden des Formulars.');
-            });
+            const form = event.target;
+            const ansprechpartner = form.elements['ansprechpartner'].value;
+            const email = form.elements['email'].value;
+            const telefonnummer = form.elements['telefonnummer'].value;
+            const artikelnummer = form.elements['artikelnummer'].value;
+            const grund = form.elements['grund'].value;
+            const beschreibung = form.elements['beschreibung'].value;
+            const foto = form.elements['foto'].files[0];
+
+            const subject = `Neue ${serviceType}`;
+            let body = `Ansprechpartner: ${ansprechpartner}\nE-Mail: ${email}\nTelefonnummer: ${telefonnummer}\nArtikelnummer: ${artikelnummer}\nGrund der Reklamation: ${grund}\nBeschreibung: ${beschreibung}`;
+
+            const mailtoLink = `mailto:dirk.schramm@igel-nobilis.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            if (foto) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const base64Data = e.target.result.split(',')[1];
+                    body += `\n\nFoto des Typenschildes: ${base64Data}`;
+                    const updatedMailtoLink = `mailto:dirk.schramm@igel-nobilis.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    window.location.href = updatedMailtoLink;
+                };
+                reader.readAsDataURL(foto);
+            } else {
+                window.location.href = mailtoLink;
+            }
         }
     </script>
-    <script src="scripts.js"></script>
 </body>
 </html>
